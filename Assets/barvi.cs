@@ -11,34 +11,9 @@ public class barvi : MonoBehaviour
     public Vector3 respawnPosition; // Position de respawn
     public SpriteRenderer graphics;
     public HealthBar HealthBar;
+    public GameObject currentCheckpoint; // Référence au dernier checkpoint activé
 
-    private Vector3 respawnPoint;
-
-    void Start()
-    {
-        currentHealth = maxHealth;  
-        HealthBar.SetMaxHealth(maxHealth);
-    
-        GameObject firstCheckpoint = GameObject.FindWithTag("Checkpoint");
-        if (firstCheckpoint != null)
-        {
-            Checkpoint1 checkpointComponent = firstCheckpoint.GetComponent<Checkpoint1>();
-            if (checkpointComponent != null)
-            {
-                respawnPoint = checkpointComponent.GetRespawnPoint();
-            }
-            else
-            {
-                Debug.LogError("Le GameObject de checkpoint ne possède pas le script 'Checkpoint1' attaché.");
-            }
-        }
-        else
-        {
-        Debug.LogError("Aucun GameObject de checkpoint trouvé avec le tag 'Checkpoint'.");
-        }
-    }
-
-    void Update()//teste
+    void Update() //teste
     {
         if (Input.GetKeyDown(KeyCode.H))
         {   
@@ -49,7 +24,7 @@ public class barvi : MonoBehaviour
     public void TakeEnergie(int energie)
     {
         currentHealth += energie;
-     // Vérifier si la santé actuelle dépasse la santé maximale
+        // Vérifier si la santé actuelle dépasse la santé maximale
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth; // Réinitialiser la santé à la valeur maximale
@@ -70,6 +45,7 @@ public class barvi : MonoBehaviour
 
             if (currentHealth <= 0)
             {
+                Debug.Log("Player health reached 0. Teleporting player...");
                 TeleportPlayer(); // téléportation si la santé est <= 0
             }
         }
@@ -79,10 +55,10 @@ public class barvi : MonoBehaviour
     {
         while (invincible)
         {
-            graphics.color =new Color(1f, 1f ,1f, 0f);
-            yield return new WaitForSeconds (invincibleflashdelay);
+            graphics.color = new Color(1f, 1f ,1f, 0f);
+            yield return new WaitForSeconds(invincibleflashdelay);
             graphics.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds (invincibleflashdelay);
+            yield return new WaitForSeconds(invincibleflashdelay);
         }
     }
 
@@ -94,8 +70,27 @@ public class barvi : MonoBehaviour
 
     void TeleportPlayer()
     {   
-        transform.position = respawnPoint;
+        Debug.Log("Teleporting player to checkpoint...");
+        transform.position = respawnPosition; // Téléporte le joueur à la position de respawn
         currentHealth = maxHealth; // réinitialiser la vie du joueur
         HealthBar.SetHealth(currentHealth); 
+        Debug.Log("Player teleported!");
     }
-} 
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Checkpoint"))
+        {
+            Debug.Log("Checkpoint touched!");
+            SetCheckpoint(other.gameObject);
+        }
+    }
+
+    public void SetCheckpoint(GameObject checkpoint)
+    {
+        Debug.Log("Setting new checkpoint...");
+        currentCheckpoint = checkpoint; // Définit le nouveau checkpoint
+        respawnPosition = checkpoint.transform.position; // Met à jour la position de respawn
+        Debug.Log("Checkpoint position: " + respawnPosition);
+    }
+}

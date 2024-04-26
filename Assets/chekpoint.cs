@@ -1,28 +1,28 @@
 using UnityEngine;
 
-public class Checkpoint1 : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
-    private Vector3 respawnPoint;
+    private Vector3 checkpointPosition;
 
     private void Start()
     {
-        respawnPoint = transform.position;
-        Debug.Log("Le point de réapparition initial est : " + respawnPoint);
+        // Au début, le checkpoint est défini sur sa propre position
+        checkpointPosition = transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Vérifier si le joueur touche le checkpoint
         if (other.CompareTag("Player"))
         {
-            // Mettre à jour le point de réapparition
-            respawnPoint = transform.position;
-            Debug.Log("Le point de réapparition a été mis à jour : " + respawnPoint);
+            // Sauvegarder la position du checkpoint
+            checkpointPosition = transform.position;
         }
     }
 
-    public Vector3 GetRespawnPoint()
+    // Méthode pour réinitialiser la position du joueur au checkpoint
+    public void ResetPlayerPosition(GameObject player)
     {
-        Debug.Log("Le point de réapparition demandé est : " + respawnPoint);
-        return respawnPoint;
+        player.transform.position = checkpointPosition;
     }
 }

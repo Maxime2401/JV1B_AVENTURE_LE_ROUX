@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class mouvcamsall : MonoBehaviour
 {
-    public Vector3 cameraTargetPosition; // La position vers laquelle la caméra doit se déplacer
+    public Transform targetObject; // L'objet dont la position sera utilisée comme cible pour le déplacement de la caméra
     public float smoothSpeed = 2.0f; // Vitesse de lissage du mouvement
 
     private bool isMoving = false; // Indique si la caméra est en mouvement
@@ -27,13 +27,22 @@ public class mouvcamsall : MonoBehaviour
 
     private void MoveCameraToTargetPosition()
     {
-        // Calcule la position cible à chaque frame en utilisant l'interpolation linéaire
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraTargetPosition, smoothSpeed * Time.deltaTime);
-
-        // Vérifie si la caméra est proche de la position cible
-        if (Vector3.Distance(Camera.main.transform.position, cameraTargetPosition) < 0.1f)
+        if (targetObject != null)
         {
-            isMoving = false; // Arrête le déplacement de la caméra une fois qu'elle est suffisamment proche de la position cible
+            // Calcule la position cible à chaque frame en utilisant l'interpolation linéaire
+            Vector3 targetPosition = targetObject.position;
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+
+            // Vérifie si la caméra est proche de la position cible
+            if (Vector3.Distance(Camera.main.transform.position, targetPosition) < 0.1f)
+            {
+                isMoving = false; // Arrête le déplacement de la caméra une fois qu'elle est suffisamment proche de la position cible
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Aucun objet cible assigné pour le déplacement de la caméra.");
+            isMoving = false; // Arrête le déplacement de la caméra si aucun objet cible n'est assigné
         }
     }
 }

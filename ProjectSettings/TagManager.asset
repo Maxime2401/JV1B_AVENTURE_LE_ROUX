@@ -15,6 +15,7 @@ TagManager:
   - next
   - Checkpoint
   - Mur
+  - rg
   layers:
   - Default
   - TransparentFX

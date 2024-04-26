@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Inventaire : MonoBehaviour
 {
     public int coinsCount;
-    public Text coinsCountText;
+    public Text CountText;
 
     public static Inventaire instance;
 
@@ -17,7 +17,7 @@ public class Inventaire : MonoBehaviour
     public void AddCoins(int count) // permet d'ajouter les goutes en UI
     {
         coinsCount += count;
-        coinsCountText.text = coinsCount.ToString();
+        CountText.text = coinsCount.ToString();
     }
     
 }
