@@ -12,6 +12,9 @@ TagManager:
   - none
   - electrique
   - Sol
+  - next
+  - Checkpoint
+  - Mur
   layers:
   - Default
   - TransparentFX

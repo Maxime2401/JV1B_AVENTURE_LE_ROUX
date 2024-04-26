@@ -13,13 +13,13 @@ public class gener : MonoBehaviour
                 player.EnableAttack();
 
                 // Rechercher un objet InventoryUI dans la scène
-                InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+                InventoryUIs inventoryUIs = FindObjectOfType<InventoryUIs>();
 
                 // Vérifier si l'objet InventoryUI a été trouvé
-                if (inventoryUI != null)
+                if (inventoryUIs != null)
                 {
                     // Appeler la méthode EnableAttack() de l'objet InventoryUI
-                    inventoryUI.EnableAttack();
+                    inventoryUIs.EnableAttack();
                 }
                 else
                 {

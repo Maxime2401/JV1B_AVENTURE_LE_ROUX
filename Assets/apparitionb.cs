@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUIs : MonoBehaviour
 {   
     public GameObject eneroff;
     public GameObject eneron;

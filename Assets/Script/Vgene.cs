@@ -18,10 +18,10 @@ public class vgenerateurd : MonoBehaviour
                 player.IncreaseEnergy();
 
                 // Obtenir une référence à l'objet InventoryUI dans la scène
-                InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+                InventoryUIs inventoryUIs = FindObjectOfType<InventoryUIs>();
 
                 // Vérifier si l'objet InventoryUI a été trouvé
-                if (inventoryUI != null)
+                if (inventoryUIs != null)
                 {
                     // Appeler la méthode IncreaseEnergy() de l'objet InventoryUI
                 }

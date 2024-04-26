@@ -13,13 +13,13 @@ public class gene : MonoBehaviour
                 sol.EnableRege();
 
                 // Récupérer l'instance de l'objet InventoryUI dans la scène
-                InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+                InventoryUIs inventoryUIs = FindObjectOfType<InventoryUIs>();
 
                 // Vérifier si l'objet InventoryUI a été trouvé
-                if (inventoryUI != null)
+                if (inventoryUIs != null)
                 {
                     // Appeler la méthode EnableRege() de l'objet InventoryUI
-                    inventoryUI.EnableRege();
+                    inventoryUIs.EnableRege();
                 }
                 else
                 {
