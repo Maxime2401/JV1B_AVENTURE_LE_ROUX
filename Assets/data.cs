@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Inventaire : MonoBehaviour
+public class PlayerData : MonoBehaviour
 {
-    public int coinsCount;
-    public Text CountText;
+    public static PlayerData instance; // Pour créer un singleton
 
-    public static Inventaire instance;
+    public int moneyAmount = 0; // L'argent du joueur
+    // Autres variables pour les objets, par exemple :
+    // public int numberOfKeys = 0;
 
     private void Awake()
     {
@@ -19,11 +19,5 @@ public class Inventaire : MonoBehaviour
         {
             Destroy(gameObject); // Détruire les doublons
         }
-    }
-
-    public void AddCoins(int count) // permet d'ajouter les goutes en UI
-    {
-        coinsCount += count;
-        CountText.text = coinsCount.ToString();
     }
 }
