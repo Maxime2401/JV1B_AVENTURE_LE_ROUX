@@ -9,7 +9,8 @@ public class Inventaire : MonoBehaviour
     public static Inventaire instance;
 
     private void Awake()
-    {
+    { 
+        CountText = GameObject.Find("Textpiece").GetComponent<Text>();
         if (instance == null)
         {
             instance = this;
