@@ -16,6 +16,8 @@ TagManager:
   - Checkpoint
   - Mur
   - rg
+  - enemie
+  - tapis
   layers:
   - Default
   - TransparentFX

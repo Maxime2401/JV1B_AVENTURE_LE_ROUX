@@ -15,7 +15,7 @@ public class barvi : MonoBehaviour
 
     void Update() //teste
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.R))
         {   
             TakeDamage(1);
         }
@@ -32,6 +32,7 @@ public class barvi : MonoBehaviour
         HealthBar.SetHealth(currentHealth);
     }
 
+
     
     public void TakeDamage(int damage)
     {       
@@ -39,9 +40,7 @@ public class barvi : MonoBehaviour
         {
             currentHealth -= damage;
             HealthBar.SetHealth(currentHealth);
-            invincible = true;
-            StartCoroutine(invincibleFrash());
-            StartCoroutine(HandinvincibleDelay());
+
 
             if (currentHealth <= 0)
             {
@@ -84,7 +83,34 @@ public class barvi : MonoBehaviour
             Debug.Log("Checkpoint touched!");
             SetCheckpoint(other.gameObject);
         }
+    
+    
+        if (other.CompareTag("enemie"))
+        {
+            StartCoroutine(EnableInvincibilityWithDelay());
+            StartCoroutine (invincibleFrash());
+        }
     }
+
+    IEnumerator EnableInvincibilityWithDelay()
+    {
+        // Attendre une demi-seconde
+        yield return new WaitForSeconds(0.5f);
+
+     // Après avoir attendu, activer l'invincibilité
+        Debug.Log("Touché par un ennemi");
+     invincible = true;
+
+        // Démarrer la coroutine pour désactiver l'invincibilité après un certain temps
+        StartCoroutine(DisableInvincibility());
+    }
+    // Coroutine pour désactiver l'invincibilité après un certain temps
+    IEnumerator DisableInvincibility()
+    {
+        yield return new WaitForSeconds(2f); // Attendre pendant 3 secondes
+        invincible = false; // Désactiver l'invincibilité
+    }
+
 
     public void SetCheckpoint(GameObject checkpoint)
     {

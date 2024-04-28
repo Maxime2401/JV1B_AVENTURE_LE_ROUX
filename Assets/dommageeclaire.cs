@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dammage : MonoBehaviour
+public class Dammageecl : MonoBehaviour
 {
     private bool canDealDamage = true; // Indique si le script peut infliger des dégâts au joueur
     public float disableTime = 3f; // Temps de désactivation du script après avoir été touché par un trigger électrique
@@ -21,7 +21,7 @@ public class Dammage : MonoBehaviour
             if (barvi != null)
             {
                 // Infligez des dégâts au joueur
-                barvi.TakeDamage(1);
+                barvi.TakeDamage(10);
                 Debug.Log("Damage dealt to player!");
 
                 // Désactiver la capacité de ce script à infliger des dégâts temporairement

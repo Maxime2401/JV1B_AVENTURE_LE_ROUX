@@ -1,25 +1,49 @@
 using UnityEngine;
 
-public class AfficherMap : MonoBehaviour
-{
-    public GameObject mapUI; // Référence à votre panneau/UI de map
-    public GameObject salle1Image; // Référence à l'image de la salle 1
-
-    public bool salle1Active = false; // Définir à vrai lorsque la salle 1 est active
+public class MapUIs : MonoBehaviour
+{   
+    public GameObject salle2;
+    public GameObject carte; // Référence au panneau de l'inventaire dans l'UI
+    public GameObject salle1;
+    private bool salle1Active = false;    
+    private bool salle2Active = false;
 
     void Update()
     {
-        // Vérifie si la touche M est enfoncée
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            // Active ou désactive le panneau/UI de map selon son état actuel
-            mapUI.SetActive(!mapUI.activeSelf);
+            Debug.Log("Touche M pressée !");
 
-            // Si la salle 1 est active, active son image
+            // Inverse l'état d'activation du panneau de la carte
+            carte.SetActive(!carte.activeSelf);
+
+            // Si la salle 1 est active, active ou désactive la salle 1
             if (salle1Active)
             {
-                salle1Image.SetActive(true);
+                salle1.SetActive(!salle1.activeSelf);
+                Debug.Log("Activation/Désactivation de la salle 1 !");
+            }
+
+            // Si la salle 2 est active, active ou désactive la salle 2
+            if (salle2Active)
+            {
+                salle2.SetActive(!salle2.activeSelf);
+                Debug.Log("Activation/Désactivation de la salle 2 !");
             }
         }
+    }
+
+    // Méthode appelée lorsque la salle 1 doit être activée
+    public void EnableSalle1()
+    {
+        salle1Active = true;
+        Debug.Log("Salle 1 activée !");
+    }
+
+    // Méthode appelée lorsque la salle 2 doit être activée
+    public void EnableSalle2()
+    {
+        salle2Active = true;
+        Debug.Log("Salle 2 activée !");
     }
 }
