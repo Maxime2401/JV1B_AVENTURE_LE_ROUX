@@ -18,22 +18,22 @@ public class player : MonoBehaviour
         if (canAttack && venergie >0 ) // Utilisez && pour vérifier deux conditions simultanément
         {   
             eneron.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Y) && attackObjectH != null)
+            if (Input.GetKeyDown(KeyCode.Z) && attackObjectH != null)
             {
                 AttackH();
                 eneron.SetActive(false);
             }
-            else if (Input.GetKeyDown(KeyCode.G)&& attackObjectG != null)
+            else if (Input.GetKeyDown(KeyCode.Q)&& attackObjectG != null)
             {
                 AttackG();
                 eneron.SetActive(false);
             }
-            else if (Input.GetKeyDown(KeyCode.H)&& attackObjectB != null)
+            else if (Input.GetKeyDown(KeyCode.S)&& attackObjectB != null)
             {
                 AttackB();
                 eneron.SetActive(false);
             }
-            else if (Input.GetKeyDown(KeyCode.J)&& attackObjectD != null)
+            else if (Input.GetKeyDown(KeyCode.D)&& attackObjectD != null)
             {
                 AttackJ();
                 eneron.SetActive(false);
