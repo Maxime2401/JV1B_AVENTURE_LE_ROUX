@@ -3,7 +3,7 @@ using UnityEngine;
 public class mouvcamsall : MonoBehaviour
 {
     public Transform targetObject; // L'objet dont la position sera utilisée comme cible pour le déplacement de la caméra
-    public float smoothSpeed = 2.0f; // Vitesse de lissage du mouvement
+    public float smoothSpeed = 4.0f; // Vitesse de lissage du mouvement
 
     private bool isMoving = false; // Indique si la caméra est en mouvement
 

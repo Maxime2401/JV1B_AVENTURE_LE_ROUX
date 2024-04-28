@@ -23,7 +23,7 @@ public class tue : MonoBehaviour
             if (barvi != null)
             {
                 // Infligez des dégâts au joueur
-                barvi.TakeDamage(10);
+                barvi.TakeDamage(4);
                 Debug.Log("Damage dealt to player!");
 
             }

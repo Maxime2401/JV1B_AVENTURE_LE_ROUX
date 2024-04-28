@@ -21,7 +21,7 @@ public class Dammageecl : MonoBehaviour
             if (barvi != null)
             {
                 // Infligez des dégâts au joueur
-                barvi.TakeDamage(10);
+                barvi.TakeDamage(4);
                 Debug.Log("Damage dealt to player!");
 
                 // Désactiver la capacité de ce script à infliger des dégâts temporairement

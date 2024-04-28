@@ -13,14 +13,26 @@ public class barvi : MonoBehaviour
     public HealthBar HealthBar;
     public GameObject currentCheckpoint; // Référence au dernier checkpoint activé
 
+    void Start()
+    {
+        // Définir la position de réapparition initiale au démarrage du jeu
+        SetInitialSpawnPosition();
+    }
+
+    void SetInitialSpawnPosition()
+    {
+        // Assigner une position initiale arbitraire
+        respawnPosition = transform.position;
+    }
+
     void Update() //teste
     {
         if (Input.GetKeyDown(KeyCode.R))
-        {   
+        {
             TakeDamage(1);
         }
     }
-    
+
     public void TakeEnergie(int energie)
     {
         currentHealth += energie;
@@ -32,15 +44,12 @@ public class barvi : MonoBehaviour
         HealthBar.SetHealth(currentHealth);
     }
 
-
-    
     public void TakeDamage(int damage)
-    {       
+    {
         if (!invincible)
         {
             currentHealth -= damage;
             HealthBar.SetHealth(currentHealth);
-
 
             if (currentHealth <= 0)
             {
@@ -50,7 +59,7 @@ public class barvi : MonoBehaviour
         }
     }
 
-    public IEnumerator invincibleFrash()// permet de faire clignoter le joueur lors qu'il prend des dégats
+    public IEnumerator invincibleFrash()
     {
         while (invincible)
         {
@@ -68,7 +77,7 @@ public class barvi : MonoBehaviour
     }
 
     void TeleportPlayer()
-    {   
+    {
         Debug.Log("Teleporting player to checkpoint...");
         transform.position = respawnPosition; // Téléporte le joueur à la position de respawn
         currentHealth = maxHealth; // réinitialiser la vie du joueur
@@ -83,8 +92,7 @@ public class barvi : MonoBehaviour
             Debug.Log("Checkpoint touched!");
             SetCheckpoint(other.gameObject);
         }
-    
-    
+
         if (other.CompareTag("enemie"))
         {
             StartCoroutine(EnableInvincibilityWithDelay());
@@ -97,20 +105,19 @@ public class barvi : MonoBehaviour
         // Attendre une demi-seconde
         yield return new WaitForSeconds(0.5f);
 
-     // Après avoir attendu, activer l'invincibilité
+        // Après avoir attendu, activer l'invincibilité
         Debug.Log("Touché par un ennemi");
-     invincible = true;
+        invincible = true;
 
         // Démarrer la coroutine pour désactiver l'invincibilité après un certain temps
         StartCoroutine(DisableInvincibility());
     }
-    // Coroutine pour désactiver l'invincibilité après un certain temps
+
     IEnumerator DisableInvincibility()
     {
         yield return new WaitForSeconds(2f); // Attendre pendant 3 secondes
         invincible = false; // Désactiver l'invincibilité
     }
-
 
     public void SetCheckpoint(GameObject checkpoint)
     {
